@@ -14,6 +14,12 @@ import express from 'express';
 import  cors from 'cors'; // Import the CORS middleware
 //import  os  from 'os';
 
+// ES modified 
+import { fileURLToPath } from 'url';
+import { basename } from 'path';
+
+const isMainModule = basename(fileURLToPath(import.meta.url)) === process.argv[1].split(/[\\/]/).pop();
+
 // Load environment variables from .env file
 dotenv.config();
 // machine-monitor-dashboard-backend/server.js
@@ -1349,7 +1355,7 @@ app.get('/api/db-check', async (req, res) => {
 
 
 // --- Export modules for Jest testing ---
-module.exports = {
+export {
     app,
     db, // Assuming 'db' is correctly available here
    // calculatePrimaryBroadcastAddress,
@@ -1360,7 +1366,7 @@ module.exports = {
     DISCOVERY_MESSAGE   // Export constants
 };
 // Start the server only if this file is run directly (not imported as a module for testing)
-if (require.main === module) {
+if (isMainModule) {
     db.getConnection()
         .then(() => {
             console.log('Successfully connected to the database pool.');
