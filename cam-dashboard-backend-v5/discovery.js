@@ -9,7 +9,7 @@ import { UDP_PORT, DISCOVERY_MESSAGE } from './config.js' // Assuming config is 
  * Looks for the first non-internal IPv4 interface.
  * @returns {string|null} The broadcast address or null if not found/calculable.
  */
-export function calculatePrimaryBroadcastAddress() {
+export function calculatePrimaryBroadcastAddress()   {
     const interfaces = os.networkInterfaces();
     for (const name in interfaces) {
         for (const iface of interfaces[name]) {
